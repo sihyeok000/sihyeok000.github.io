@@ -1,64 +1,53 @@
-# Site
-name: "sihyeok000"
-title: "sihyeok000의 블로그"
-description: "오늘의 학습 - 딥러닝, 머신러닝, 코딩테스트, CS, ..."
-logo: 'assets/images/logo.png'
-favicon: 'assets/images/logo.png'
-baseurl: /mediumish-theme-jekyll
-google_analytics: ''
-disqus: 'demowebsite'
-mailchimp-list: ''
-include: ["_pages"]
-permalink: /:title/
+title: example.com
+description: "Satellite - jekyll blog theme"
+logo_img: "/assets/img/favicon.webp"
+profile_img: "/assets/img/profile.webp"
 
-# Authors
-authors:
-  sihyeok000:
-    name: Sihyeok Lee
-    display_name: 이시혁
-    gravatar: 'assets/images/profile.jpg'
-    email: lt4545@korea.ac.kr
-    web: https://sihyeok000.github.io
-    twitter: 
-    description: "DL/ML"
+# Social Links
+email: example@gmail.com
+github_username: github
+twitter_username: twitter
+instagram_username: instagram
+linkedin_username: linkedin
+facebook_username: facebook
 
+# External API
+giscus_repo: "byanko55/jekyll-theme-satellite"
+giscus_repoId: "R_kgDOJ6fqWg"
+giscus_category: "Q&A"
+giscus_categoryId: "DIC_kwDOJ6fqWs4Cc7p7"
+goatcounter_code: byanko77
+google_analytics:
 
-# Plugins
+# If your repo name follows the format "<user-name>.github.io", then leave the below blank.
+# Otherwise, set its value as "/<repo-name>". ex) baseurl: /myblog
+baseurl:
+
+# Build settings
 plugins:
-  - jekyll-paginate
-  - jekyll-sitemap
   - jekyll-feed
+  - jekyll-sitemap
   - jekyll-seo-tag
-  - jekyll-archives
-    
-# Archives
-jekyll-archives:
-  enabled:
-    - categories
-  layout: archive
-  permalinks:
-    category: '/category/:name/'
-    
-# Pagination 
-paginate: 6
-paginate_path: /page:num/
-    
-# Other
-markdown: kramdown
+  - jekyll-loading-lazy
 
+exclude:
+  - docs/
+
+collections:
+  pages:
+    output: true
+    permalink: /:path.html
+
+defaults:
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+      date: "1900-01-01"
+
+# Markdown newline activator 
 kramdown:
   input: GFM
-  syntax_highlighter: rouge
-  syntax_highlighter_opts:
-    block:
-      line_numbers: true
-
-# Adsense (change to "enabled" to activate, also your client id and ad slot. Create a new ad unit from your Adsense account to get the slot.)
-adsense: "disabled"
-adsense-data-ad-client: "ca-pub-3412143450191416"
-adsense-data-ad-slot: "1363087678"
-
-# Lazy Images ("enabled" or "disabled")
-lazyimages: "disabled"
-
-exclude: [changelog.md, LICENSE.txt, README.md, Gemfile, Gemfile.lock]
+  hard_wrap: true
