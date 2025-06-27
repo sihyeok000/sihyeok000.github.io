@@ -1,15 +1,15 @@
-title: Example.com
-description: "Introduction for you blog"
+title: sihyeok000
+description: "공부 기록"
 logo_img: "/assets/img/favicon.webp"
 profile_img: "/assets/img/profile.webp"
 
 # Social Links
-email: example@gmail.com
-github_username: github
-twitter_username: twitter
-instagram_username: instagram
-linkedin_username: linkedin
-facebook_username: facebook
+email: lt4545@korea.ac.kr
+github_username: sihyeok000
+twitter_username:
+instagram_username: sihyeok000
+linkedin_username:
+facebook_username:
 
 # External API
 giscus_repo:
