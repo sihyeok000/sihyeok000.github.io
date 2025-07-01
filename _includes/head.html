@@ -13,6 +13,8 @@
 {% seo %}
 
 <link rel="shortcut icon" type="image/png" href="{{ site.logo_img | prepend: site.baseurl }}">
+
+<!-- 1. 기존 로컬 폰트 로드 (그대로 유지) -->
 <style>
 @font-face {
     font-family: 'Nunito Sans';
@@ -42,16 +44,25 @@
 }
 </style>
 
+<!-- 2. 본고딕(Noto Sans KR)을 Google Fonts CDN으로 추가 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+
+
 <script src="{{ '/assets/js/fontfaceobserver.js' | prepend: site.baseurl }}" type="text/javascript"></script>
 <script type="text/javascript">
+    // 3. 모든 폰트(기존 폰트 + 본고딕)를 감지하도록 수정
     const nunitoObserver = new FontFaceObserver('Nunito Sans');
     const righteousObserver = new FontFaceObserver('Righteous');
     const latoObserver = new FontFaceObserver('Lato');
+    const notoObserver = new FontFaceObserver('Noto Sans KR');
   
     Promise.all([
         nunitoObserver.load(),
         righteousObserver.load(),
         latoObserver.load(),
+        notoObserver.load() // Noto Sans KR 감지 추가
     ]).then(function(){
         document.documentElement.className += " fonts-loaded";
     });
