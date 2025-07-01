@@ -47,7 +47,7 @@ CNN은 이러한 문제의 해결책으로 떠올랐지만, 1990년대 이후 SV
 
 R-CNN 시스템은 세 가지 주요 모듈로 구성됩니다.
 
-![R-CNN 모델 구조](https://imgur.com/GkhUs94)
+![R-CNN 모델 구조](\assets\img\r_cnn_architecture.png)
 
 1.  **Region Proposal (영역 제안):** 먼저, 이미지에서 객체가 있을 만한 위치를 약 2000개 정도 찾아냅니다. 이 논문에서는 **Selective Search** 알고리즘을 사용합니다. 이 단계에서는 객체의 종류(class)는 고려하지 않고, 오직 "여기에 무언가 있을 것 같다"는 후보 영역만 빠르게 추출합니다.
 
@@ -65,7 +65,7 @@ R-CNN의 높은 성능은 효과적인 훈련 전략 덕분입니다.
 
 > **💡 IoU (Intersection-over-Union)란?**
 > Fine-tuning과 SVM 훈련 시, 어떤 영역이 '정답'이고 어떤 영역이 '오답'인지 판단하는 기준이 필요합니다. 이때 IoU가 사용됩니다. IoU는 **실제 정답 영역(Ground-truth box)과 모델이 제안한 영역(Proposed region)이 얼마나 겹치는지를 나타내는 지표**입니다.
-> ![IoU 계산법](https://imgur.com/1IwDnR3)
+> ![IoU 계산법](\assets\img\IoU.png)
 
 > R-CNN에서는 이 IoU 값이 특정 임계값(예: 0.5) 이상이면 '정답'(Positive), 그보다 훨씬 낮으면 '오답'(Negative)으로 간주하여 모델을 학습시킵니다.
 
