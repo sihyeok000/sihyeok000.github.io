@@ -65,7 +65,7 @@ R-CNN의 높은 성능은 효과적인 훈련 전략 덕분입니다.
 
 > **💡 IoU (Intersection-over-Union)란?**
 > Fine-tuning과 SVM 훈련 시, 어떤 영역이 '정답'이고 어떤 영역이 '오답'인지 판단하는 기준이 필요합니다. 이때 IoU가 사용됩니다. IoU는 **실제 정답 영역(Ground-truth box)과 모델이 제안한 영역(Proposed region)이 얼마나 겹치는지를 나타내는 지표**입니다.
-> ![IoU 계산법](\assets\img\IoU.png)
+><img src="\assets\img\IoU.png" width="200px">
 
 > R-CNN에서는 이 IoU 값이 특정 임계값(예: 0.5) 이상이면 '정답'(Positive), 그보다 훨씬 낮으면 '오답'(Negative)으로 간주하여 모델을 학습시킵니다.
 
