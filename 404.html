@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>404 - 페이지를 찾을 수 없습니다</title>
+    <title>404 - Page Not Found</title>
     <link rel="shortcut icon" type="image/png" href="/assets/img/favicon.webp">
     <style>
         @font-face {
@@ -66,8 +66,8 @@
             font-size: 8rem;
             line-height: 1;
             font-weight: 900;
-            color: #fa4251;
-            text-shadow: 0 0 15px rgba(250, 66, 81, 0.7);
+            color: #64c8c8; /* 온화한 청록색으로 변경 */
+            text-shadow: 0 0 15px rgba(100, 200, 200, 0.7); /* 그림자 색상도 함께 변경 */
         }
         .message-box p {
             font-size: 1.5rem;
@@ -100,7 +100,7 @@
             <p id="main-message"></p>
             <p id="sub-message"></p>
         </div>
-        <a href="/" class="go-home">🏠 홈으로 돌아가기</a>
+        <a href="/" class="go-home">🏠 Take Me Home</a>
     </div>
 
     <script src="/assets/js/background.js"></script>
@@ -124,8 +124,8 @@
             const mainMessageEl = document.getElementById('main-message');
             const subMessageEl = document.getElementById('sub-message');
 
-            const mainText = "おっと、道の果てまで来てしまったようですね。";
-            const subText = "心配しないでください。下のボタンで安全な場所に戻れます。";
+            const mainText = "Oops! It seems you've reached the end of the road.";
+            const subText = "Don't worry. The button below will take you back to safety.";
 
             typeWriter(mainMessageEl, mainText, 70, () => {
                 typeWriter(subMessageEl, subText, 50);
