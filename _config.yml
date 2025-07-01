@@ -1,37 +1,45 @@
-title: example.com
-description: "Satellite - jekyll blog theme"
+title: sihyeok000
+description: "Deep learning study note"
 logo_img: "/assets/img/favicon.webp"
 profile_img: "/assets/img/profile.webp"
 
 # Social Links
-email: example@gmail.com
-github_username: github
-twitter_username: twitter
-instagram_username: instagram
-linkedin_username: linkedin
-facebook_username: facebook
+email: lt4545@korea.ac.kr
+github_username: sihyeok000
+twitter_username:
+instagram_username: sihyeok000
+linkedin_username:
+facebook_username:
 
 # External API
-giscus_repo: "byanko55/jekyll-theme-satellite"
-giscus_repoId: "R_kgDOJ6fqWg"
-giscus_category: "Q&A"
-giscus_categoryId: "DIC_kwDOJ6fqWs4Cc7p7"
-goatcounter_code: byanko77
+giscus_repo:
+giscus_repoId:
+giscus_category:
+giscus_categoryId:
+goatcounter_code:
 google_analytics:
 
 # If your repo name follows the format "<user-name>.github.io", then leave the below blank.
 # Otherwise, set its value as "/<repo-name>". ex) baseurl: /myblog
 baseurl:
 
+# # # # # # # # # # # # # # # # # # # # # # # # # #
+#                                                 #
+#   Not recommended to touch the materials below  #
+#                                                 #
+#    Any changes may contribute to malfunction    #
+#                                                 #
+# # # # # # # # # # # # # # # # # # # # # # # # # #
+
 # Build settings
-plugins:
-  - jekyll-feed
-  - jekyll-sitemap
-  - jekyll-seo-tag
-  - jekyll-loading-lazy
+
+# If you want to deploy Git Page, but choosing the second Installation method (described in README.md)
+# rather than fork, then replace the below line with `remote_theme: byanko55/jekyll-theme-satellite`.
+# Otherwise, DO NOT change it.
+theme: jekyll-theme-satellite
 
 exclude:
-  - docs/
+  - _posts
 
 collections:
   pages:
