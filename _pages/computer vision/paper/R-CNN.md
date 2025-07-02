@@ -16,37 +16,36 @@ Object Detection 분야에 혁신을 가져온 R-CNN(Regions with CNN features) 
 
 ---
 
-## Abstract (초록)
+## R-CNN, Object Detection의 게임 체인저
 
-> 이 논문은 기존의 Object Detection 성능을 크게 뛰어넘는, 간단하면서도 확장 가능한 새로운 알고리즘을 제안한다. 이전까지 PASCAL VOC 데이터셋에서 최고 성능은 low-level 이미지 특징과 high-level 컨텍스트를 결합한 복잡한 앙상블 모델이었다.
-
-R-CNN은 두 가지 핵심 아이디어를 결합하여 mAP(mean Average Precision)를 30% 이상 향상시켰다.
+R-CNN은 두 가지 핵심 아이디어를 결합하여 당시의 성능 지표였던 mAP(mean Average Precision)를 30% 이상 끌어올리는 기염을 토했습니다.
 
 1.  **Regions with CNNs:** 객체의 위치를 찾고 분할하기 위해, 먼저 이미지에서 객체가 있을 법한 영역(Region Proposal)을 찾고, 이 영역들에 CNN(Convolutional Neural Network)을 적용한다.
 2.  **Pre-training & Fine-tuning:** 라벨링된 데이터가 부족한 문제를 해결하기 위해, 대규모 데이터셋(ILSVRC)으로 미리 학습(Supervised Pre-training)시킨 후, 특정 도메인의 데이터셋(PASCAL)에 맞게 미세 조정(Fine-tuning)하여 성능을 극대화한다.
 
-이 접근법은 당시 최고의 모델이었던 OverFeat을 큰 차이로 능가하며 Object Detection의 새로운 패러다임을 열었다.
+이 접근법은 당시 최고의 모델이었던 OverFeat을 큰 차이로 능가하며 Object Detection의 새로운 패러다임을 열었습니다.
 
 ---
 
-## 1. Introduction (서론)
+## 왜 R-CNN이 필요했을까?
 
-과거의 시각 인식(Visual Recognition) 기술은 주로 `SIFT`, `HOG`와 같은 특징 추출 방식에 의존했다. 이는 인간의 시각 시스템으로 치면 초기 단계인 V1 피질의 기능과 유사하다. 하지만 실제 사물 인식은 그보다 더 복잡한 과정을 거치므로, 더 나은 특징을 학습할 필요가 있었다.
+과거의 시각 인식(Visual Recognition) 기술은 주로 `SIFT`, `HOG`와 같은 고정된 특징 추출 방식에 의존했습니다. 이는 이미지의 밝기, 형태 등 단순한 정보를 기반으로 했기에 복잡한 실제 환경의 객체를 인식하는 데 한계가 있었습니다.
 
-CNN은 이러한 문제의 해결책으로 떠올랐으나, 1990년대 이후 SVM의 등장으로 주류에서 밀려났다. 그러나 2012년, AlexNet이 ILSVRC에서 압도적인 성능을 보여주면서 CNN은 다시 주목받기 시작했다.
+CNN은 이러한 문제의 해결책으로 떠올랐지만, 1990년대 이후 한동안 주류에서 밀려나 있었습니다. 하지만 2012년, AlexNet이 이미지 분류 대회인 ILSVRC에서 압도적인 성능을 보여주면서 딥러닝과 CNN은 화려하게 부활했습니다.
 
-이 논문은 CNN을 Object Detection에 효과적으로 적용하기 위한 두 가지 핵심 질문에 집중한다.
+R-CNN은 바로 이 강력한 CNN을 '이미지 분류'가 아닌 '객체 탐지'에 어떻게 효과적으로 적용할 수 있을지에 대한 고민에서 출발했습니다.
 
 * **Deep Network를 사용하여 객체의 위치를 어떻게 특정할 것인가? (Localization)**
 * **양이 적은 데이터만으로 어떻게 대용량 모델을 훈련시킬 것인가? (Training)**
 
 ---
 
-## 2. R-CNN을 이용한 객체 탐지 (Object detection with R-CNN)
+## R-CNN은 어떻게 동작하는가?
 
 R-CNN 시스템은 세 가지 주요 모듈로 구성된다.
 
 ![R-CNN 모델 구조](/assets/img/r_cnn_architecture.png)
+> 이미지 출처: Rich feature hierarchies for accurate object detection and semantic segmentation (Girshick et al., 2014)
 
 1.  **Region Proposal (영역 제안):** 먼저, 이미지에서 객체가 있을 만한 위치를 약 2000개 정도 찾아낸다. 이 논문에서는 **Selective Search** 알고리즘을 사용한다. 이 단계에서는 객체의 종류(class)는 고려하지 않고, 오직 "여기에 무언가 있을 것 같다"는 후보 영역만 빠르게 추출한다.
 
@@ -73,11 +72,11 @@ R-CNN은 Selective Search가 제안한 영역의 위치가 완벽하지 않을 �
 
 ---
 
-## 3. 결론 (Conclusion)
+## R-CNN의 의의와 영향
 
-R-CNN은 두 가지 핵심 아이디어를 통해 Object Detection 분야에 큰 발전을 이루었다.
+R-CNN은 다음과 같은 중요한 기여를 통해 Object Detection 분야에 큰 발전을 이루었습니다.
 
 1.  **고전적인 컴퓨터 비전 기법(Region Proposals)과 딥러닝(CNN)의 성공적인 결합**을 보여주었다.
 2.  대규모 데이터셋으로 **사전 학습(Pre-training) 후, 특정 도메인에 맞게 미세 조정(Fine-tuning)**하는 패러다임이 데이터가 부족한 환경에서도 매우 효과적임을 입증했다.
 
-이러한 접근법은 이후 등장하는 Fast R-CNN, Faster R-CNN 등 더 발전된 모델들의 기반이 되었다.
+비록 처리 속도가 느리다는 단점이 있었지만, R-CNN이 제시한 접근법은 이후 등장하는 Fast R-CNN, Faster R-CNN 등 더 빠르고 정확한 모델들의 탄탄한 기반이 되었습니다.
