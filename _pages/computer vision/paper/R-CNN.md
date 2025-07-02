@@ -10,6 +10,8 @@ thumbnail: "/assets/img/thumbnail/rcnn.jpg"
 bookmark: true
 ---
 
+> 이 글은 [R-CNN : Rich feature hierarchies for accurate object detection and semantic segmentation](https://arxiv.org/abs/1311.2524) 논문을 참고하여 핵심 내용을 정리한 것입니다.
+
 # R-CNN: 정확한 객체 탐지 및 분할을 위한 풍부한 특징 계층 구조
 
 Object Detection 분야에 혁신을 가져온 R-CNN(Regions with CNN features) 논문의 핵심을 위주로 정리하고, 그 원리를 설명한다.
