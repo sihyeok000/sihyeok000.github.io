@@ -196,6 +196,8 @@ main {
   em { padding-right:2px; }
 
   a {
+    position: relative;          // 추가: 자식 요소의 위치 기준점으로 설정
+    display: inline-block;       // 추가: 안정적인 블록 컨텍스트 생성
     color:dodgerblue;
     text-decoration:none;
 
@@ -209,6 +211,10 @@ main {
       text-decoration-color:midnightblue;
       clip-path:polygon(0 0, 0 0, 0% 100%, 0 100%);
       transition:clip-path .25s;
+      top: 0;                    // 추가: Y축 위치 정렬
+      left: 0;                   // 추가: X축 위치 정렬
+      width: 100%;               // 추가: 너비를 부모와 동일하게 설정
+      white-space: nowrap;       // 추가: 줄바꿈 방지
     }
     &:hover::before {
       clip-path:polygon(0 0, 100% 0, 100% 100%, 0 100%);
