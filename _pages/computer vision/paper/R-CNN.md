@@ -11,7 +11,7 @@ thumbnail: "/assets/img/thumbnail/rcnn.jpg"
 bookmark: true
 ---
 
-> 이 글은 [R-CNN : Rich feature hierarchies for accurate object detection and semantic segmentation](https://arxiv.org/abs/1311.2524) 논문을 참고하여 핵심 내용을 정리한 것입니다.
+> 이 글은 [Rich feature hierarchies for accurate object detection and semantic segmentation](https://arxiv.org/abs/1311.2524) 논문을 참고하여 핵심 내용을 정리한 것입니다.
 
 ---
 
