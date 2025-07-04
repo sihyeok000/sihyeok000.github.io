@@ -32,10 +32,8 @@ R-CNN은 두 가지 핵심 아이디어를 결합하여 VOC2012에서 이전 최
 
 > **💡 SIFT(Scale-Invariant Feature Transform)**
 > 이미지에서 scale, rotation 등의 변화에 invariant(robust)한 특징점을 추출하는 컴퓨터 비전 알고리즘. DoG(Difference of Gaussian)을 계산하여 극값을 찾은 뒤(주로 edge, corner) 특징점 주변의 패턴을 모아 벡터로 description하는 방식으로 특징을 추출한다.
-
-![SIFT](/assets/img/sift.png)
-> 이미지 출처 : Boosting of factorial correspondence analysis for image retrieval
-
+> ![SIFT](/assets/img/sift.png)
+이미지 출처 : Boosting of factorial correspondence analysis for image retrieval
 
   
 > **💡 HOG(Histogram of Oriented Gradients)**
