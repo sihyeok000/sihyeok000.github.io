@@ -1,3 +1,16 @@
+---
+title: "R-CNN : Rich feature hierarchies for accurate object detection and semantic segmentation"
+tags:
+    - Computer vision
+    - Deep learning
+    - CNN
+    - R-CNN
+    - Object deection
+date: "2024-05-12"
+thumbnail: "/assets/img/thumbnail/rcnn.jpg"
+bookmark: true
+---
+
 > 이 글은 [R-CNN : Rich feature hierarchies for accurate object detection and semantic segmentation](https://arxiv.org/abs/1311.2524) 논문을 참고하여 핵심 내용을 정리한 것입니다.
 
 ---
@@ -28,22 +41,22 @@ R-CNN은 두 가지 핵심 아이디어를 결합하여 VOC2012에서 이전 최
 > **💡 HOG(Histogram of Oriented Gradients)**
 > 이미지를 작은 구역들로 나누어 경계선의 방향 분포를 히스토그램으로 만들어 이미지 형태를 표현하는 방법. 흑백으로 변환 후 픽셀마다 x, y 방향으로의 밝기차이를 계산하고 이미지를 일정 크기의 셀들로 나누어 그래디언트에 대한 히스토그램을 만든다.
 
-실제로 영장류의 시각을 통한 recognition이 몇 단계 downstream으로 일어난다는 것은 이미지에서 더 좋은 특징을 잡기 위해 몇 단계를 나눌 수 있다는 것을 암시하고, 이는 생물학적 영감을 받아 개발된 Neocognitron 모델과도 연관이 있다. 이 영향을 받은 CNN(Convolution Neural Network)의 경우 1990년대에 많이 사용되었으나 SVM의 등장으로 유행이 끝났다. 그러나 2012년 CNN을 사용한한 `AlexNet`이 2012년 ImageNet 대회(ILSVRC)에서 압도적으로 1위를 하면서 컴퓨터 비전 영역에서 딥러닝, 특히 CNN의 가능성을 증명하였다.
+실제로 영장류의 시각을 통한 recognition이 몇 단계 downstream으로 일어난다는 것은 이미지에서 더 좋은 특징을 잡기 위해 몇 단계를 나눌 수 있다는 것을 암시하고, 이는 생물학적 영감을 받아 개발된 Neocognitron 모델과도 연관이 있다. 이 영향을 받은 CNN(Convolution Neural Network)의 경우 1990년대에 많이 사용되었으나 SVM의 등장으로 사용이 줄어들었다. 그러나 2012년 CNN을 사용한 `AlexNet`이 2012년 ImageNet 대회(ILSVRC)에서 압도적으로 1위를 하면서 컴퓨터 비전 영역에서 딥러닝, 특히 CNN의 가능성을 증명하였다.
 
 R-CNN은 바로 이 강력한 CNN을 '이미지 분류'가 아닌 '객체 탐지'에 어떻게 효과적으로 적용할 수 있을지에 대한 고민에서 출발했다.
 
 ---
 
-## 2가지 문제
-Object Detection에서 CNN을 적용하고, 기존 PASCAL VOC에서의 획기적인 성능 향상을 위해 저자들은 두가지 문제에 집중하였다.
+## 두 가지 문제
+Object Detection에서 CNN을 적용하고, 기존 PASCAL VOC에서의 획기적인 성능 향상을 위해 저자들은 두 가지 문제에 집중하였다.
 * **1. Deep Network를 사용하여 객체의 위치를 어떻게 특정할 것인가? (Localization)**
 * **2. 양이 적은 데이터만으로 어떻게 대용량 모델을 훈련시킬 것인가? (Training)**
 
 ##### **1. Localization**
 
-AlexNet과 같은 Image classification task와는 달리 Object detection의 경우 이미지 내에서 많은 Object를 Localizing해야한다. 이를 회귀 문제로 치환하거나, Sliding-window approach를 채택할 수 있다(비슷한 시기 `OverFeat`의 경우 이를 채택). 회귀 문제로 치환하는 경우에는 성능이 낮다는 연구결과가 있었다. 그리고 Sliding-window 방식은 convolution layers를 깊게 쌓을 시 큰 receptive fields와 strides가 발생하는 문제가 있다.
+AlexNet과 같은 Image classification task와는 달리 Object detection의 경우 이미지 내에서 많은 Object를 Localizing해야 한다. 이를 회귀 문제로 치환하거나, Sliding-window approach를 채택할 수 있다(비슷한 시기 `OverFeat`의 경우 이를 채택). 회귀 문제로 치환하는 경우에는 성능이 낮다는 연구결과가 있었다. 그리고 Sliding-window 방식은 convolutional layers를 깊게 쌓을 시 큰 receptive field와 stride가 발생하는 문제가 있다.
 
-대신 이러한 문제를 **"Recognition using regions"** 패러다임을 통해 해결한다. 테스트 시 input image에 대해서 약 2,000개의 category-independent한 region proposals를 생성하고 CNN을 사용하여 각 proposals에 대한 fixed-length feature vector를 추출한다. 이를 category-specific한 선형 SVMs를 이용해서 class를 예측하는 방식을 사용한다.
+대신 이러한 문제를 **"Recognition using regions"** 패러다임을 통해 해결한다. 테스트 시 input image에 대해서 약 2,000개의 category-independent region proposals를 생성하고 CNN을 사용하여 각 proposals에 대한 fixed-length feature vector를 추출한다. 이를 category-specific한 선형 SVM 분류기를를 이용해서 class를 예측하는 방식을 사용한다.
 
 ##### **2. Training**
 
@@ -84,7 +97,7 @@ R-CNN의 훈련 전략은 다음과 같다. 특히 Supervised Pre-training과 Do
 > `IoU = Overlapping Region / Combined Region`
 
 **Bounding-box Regression**
-모델 학습 이후 error analysis를 기반으로 localization error를 줄이기 위한 방법으로로  **Bounding-box regression**을 추가로 사용한다. 이는 R-CNN이전에 존재한 object deteciton model인 DPM(Deformable Part Model)에서 영감을 받았다. CNN을 통과해 얻은 features를 바탕으로, 제안된 영역의 위치와 크기를 실제 객체에 더 가깝게 미세 조정하는 선형 회귀 모델이다. 이 과정을 통해 mAP를 3~4%p 추가로 향상시켰다.
+모델 학습 이후 error analysis를 기반으로 localization error를 줄이기 위한 방법으로  **Bounding-box regression**을 추가로 사용한다. 이는 R-CNN이전에 존재한 object detection model인 DPM(Deformable Part Model)에서 영감을 받았다. CNN을 통과해 얻은 features를 바탕으로, 제안된 영역의 위치와 크기를 실제 객체에 더 가깝게 미세 조정하는 선형 회귀 모델이다. 이 과정을 통해 mAP를 3~4%p 추가로 향상시켰다.
 
 ---
 
@@ -95,4 +108,4 @@ R-CNN은 당시 정체되었던 object detection model의 성능을 획기적으
 1.  **고전적인 컴퓨터 비전 기법(Region Proposals)과 딥러닝(CNN)의 성공적인 결합**을 보여주었다.
 2.  대규모 데이터셋으로 **사전 학습(Pre-training) 후, 특정 도메인에 맞게 미세 조정(Fine-tuning)**하는 패러다임이 데이터가 부족한 환경에서도 매우 효과적임을 입증했다.
 
-비록 처리 속도가 느리다는 단점이 있었지만(여러 단계를 통과해야 하는 모델 구조), 이후 등장하는 `SSP-Net`, `YOLO`, `Fast R-CNN` 그리고 `Faster R-CNN` 등 더 빠르고 정확한 모델들의 기반이 되었다. CNN feature의 강력함을 AlexNet 이후 한 번 더 증명하여 Object detection에서 feature engineering이 거의 사라지고, deep feature를 표준으로 만들었다.
+비록 처리 속도가 느리다는 단점이 있었지만(여러 단계를 통과해야 하는 모델 구조), 이후 등장하는 `SPP-Net`, `YOLO`, `Fast R-CNN` 그리고 `Faster R-CNN` 등 더 빠르고 정확한 모델들의 기반이 되었다. CNN feature의 강력함을 AlexNet 이후 한 번 더 증명하여 Object detection 분야에서 feature engineering이 거의 사라지고, deep feature가 표준이 되었다.
