@@ -69,7 +69,8 @@ AlexNet과 같은 Image classification task와는 달리 Object detection의 경
 R-CNN 시스템은 세 가지 주요 모듈로 구성된다.
 
 ![R-CNN 모델 구조](/assets/img/r_cnn_architecture.png)
-> 이미지 출처: Rich feature hierarchies for accurate object detection and semantic segmentation (Girshick et al., 2014)
+이미지 출처: Rich feature hierarchies for accurate object detection and semantic segmentation (Girshick et al., 2014)
+
 
 1.  **Region Proposal (영역 제안):** 먼저, 이미지에서 객체가 있을 만한 위치를 약 2000개 정도 찾아낸다. 이 논문에서는 **Selective Search** 알고리즘을 사용한다. 이 단계에서는 객체의 종류(class)는 고려하지 않고, 오직 "여기에 무언가 있을 것 같다"는 후보 영역만 빠르게 추출한다.
 
@@ -102,6 +103,8 @@ R-CNN의 훈련 전략은 다음과 같다. 특히 Supervised Pre-training과 Do
 ## R-CNN의 의의와 영향
 
 ![Qualitative Results](/assets/img/r_cnn_results.png)
+이미지 출처: Rich feature hierarchies for accurate object detection and semantic segmentation (Girshick et al., 2014)
+
 
 R-CNN은 당시 정체되었던 object detection model의 성능을 획기적으로 끌어올리는 간단하면서도 확장가능한 알고리즘이다. 이러한 성능을 달성하기 위해서 Bottom-up region proposals에 high-capacity CNN을 적용하는것과 부족한 훈련데이터 존재시 풍부한 보조 데이터를 통해 네트워크를 pre-training한 이후 domain-specific한 해당 소규모 데이터로 fine-tuning하는 방법론이 적용되었다. 즉 R-CNN의 의의와 영향은 다음과 같다.
 
