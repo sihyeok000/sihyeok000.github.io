@@ -101,9 +101,12 @@ R-CNN의 훈련 전략은 다음과 같다. 특히 Supervised Pre-training과 Do
 
 ## R-CNN의 의의와 영향
 
+![Qualitative Results](/assets/img/r_cnn_results.png)
+
 R-CNN은 당시 정체되었던 object detection model의 성능을 획기적으로 끌어올리는 간단하면서도 확장가능한 알고리즘이다. 이러한 성능을 달성하기 위해서 Bottom-up region proposals에 high-capacity CNN을 적용하는것과 부족한 훈련데이터 존재시 풍부한 보조 데이터를 통해 네트워크를 pre-training한 이후 domain-specific한 해당 소규모 데이터로 fine-tuning하는 방법론이 적용되었다. 즉 R-CNN의 의의와 영향은 다음과 같다.
 
 1.  **고전적인 컴퓨터 비전 기법(Region Proposals)과 딥러닝(CNN)의 성공적인 결합**을 보여주었다.
 2.  대규모 데이터셋으로 **사전 학습(Pre-training) 후, 특정 도메인에 맞게 미세 조정(Fine-tuning)**하는 패러다임이 데이터가 부족한 환경에서도 매우 효과적임을 입증했다.
+
 
 비록 처리 속도가 느리다는 단점이 있었지만(여러 단계를 통과해야 하는 모델 구조), 이후 등장하는 `SPP-Net`, `YOLO`, `Fast R-CNN` 그리고 `Faster R-CNN` 등 더 빠르고 정확한 모델들의 기반이 되었다. CNN feature의 강력함을 AlexNet 이후 한 번 더 증명하여 Object detection 분야에서 feature engineering이 거의 사라지고, deep feature가 표준이 되었다.
