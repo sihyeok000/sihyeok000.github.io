@@ -14,36 +14,38 @@ bookmark: true
 
 > 이 글은 [OverFeat: Integrated Recognition, Localization and Detection using Convolutional Networks](https://arxiv.org/abs/1312.6229) 논문을 참고하여 핵심 내용을 정리한 것입니다.
 
-# OverFeat: 하나의 CNN으로 분류, 위치 찾기, 탐지를 모두 정복
+# OverFeat: 하나의 CNN으로 Classification, Localization 및 Detection
 
-AlexNet이 이미지 분류의 새 시대를 연 직후, 딥러닝의 다음 과제는 '이미지 안에 무엇이 있는가'를 넘어 '그것이 어디에 있는가'를 알아내는 객체 탐지(Object Detection)로 확장되었다. OverFeat는 **하나의 통합된 CNN 프레임워크**를 통해 이미지 분류(Classification), 객체 위치 특정(Localization), 그리고 객체 탐지(Detection)를 동시에 수행하는 혁신적인 방법을 제시하며 이 분야의 발전에 중요한 기틀을 마련한 논문이다. 
-
----
-
-## OverFeat, 통합된 비전 시스템의 시작
-
-OverFeat는 2013년 ILSVRC 대회에서 Localization 부문 우승을 차지하며 그 성능을 입증했다. 이 모델의 핵심 아이디어는 다음과 같이 요약할 수 있다.
-
-1.  **통합 프레임워크(Integrated Framework):** 분류, 위치 특정, 탐지라는 각기 다른 작업을 별개의 모델이 아닌, **특징을 공유하는 단일 CNN**으로 학습하고 해결한다. 
-2.  **효율적인 다중 스케일 슬라이딩 윈도우(Multi-Scale Sliding Window):** 이미지의 크기를 바꾸며 CNN을 여러 번 통과시키는 대신, 다양한 크기의 입력에 대해 **컨볼루션 연산을 효율적으로 공유**하여 계산 비용을 크게 줄이면서도 다중 스케일 분석을 수행한다. 
-3.  **바운딩 박스 회귀 및 누적(Bounding Box Regression & Accumulation):** 클래스를 분류하는 동시에, 객체의 정확한 위치를 예측하는 **회귀(Regressor) 모델을 학습**한다.  또한, 여러 스케일에서 예측된 경계 상자(Bounding Box)들을 억제하는 대신 **누적(Accumulate)하여 예측의 신뢰도를 높인다**. 
+AlexNet이 이미지 분류의 새 시대를 연 직후, 딥러닝의 다음 과제는 '이미지 안에 무엇이 있는가'를 넘어 '그것이 어디에 있는가'를 알아내는 객체 탐지(Object Detection)로 확장되었다. 비슷한 시기 R-CNN은 Region proposal과 classification 이 나누어진 2-stage detector로 개발되었으나  OverFeat는 **하나의 통합된 CNN 프레임워크**를 통해 이미지 분류(Classification), 객체 위치 특정(Localization), 그리고 객체 탐지(Detection)를 동시에 수행하는 방식을 제시하며 이 분야의 발전에 중요한 기틀을 마련한 논문이다.
 
 ---
-
-## 왜 OverFeat가 필요했을까?
+# OverFeat의 등장 배경
 
 CNN이 이미지 분류에서 압도적인 성능을 보이자, 연구자들은 자연스럽게 이 강력한 도구를 객체 탐지에 적용하고자 했다.  가장 직관적인 방법은 이미지의 모든 가능한 위치와 크기에 대해 잘라낸 영역(Window)마다 분류용 CNN을 실행하는 **슬라이딩 윈도우(Sliding Window)** 방식이었다. 
 
 하지만 이 방식에는 두 가지 명백한 한계가 있었다.
 
 * **부정확한 위치:** 슬라이딩 윈도우가 실제 객체의 경계와 정확히 일치할 확률은 매우 낮다. 창문 안에 객체의 일부(예: 개의 머리)만 포함되더라도 분류는 성공할 수 있지만, 객체의 정확한 위치를 찾는 데는 실패하게 된다. 
-* **엄청난 계산량:** 이미지 전체를 조밀하게 훑으려면 수많은 윈도우에 대해 반복적으로 CNN을 실행해야 하므로 비효율적이다.
+* **많은 계산량:** 이미지 전체를 조밀하게 훑으려면 수많은 윈도우에 대해 반복적으로 CNN을 실행해야 하므로 비효율적이다.
+
 
 OverFeat는 바로 이 문제들을 해결하기 위해, 단순히 분류기를 반복 실행하는 것을 넘어 **하나의 네트워크가 위치 정보까지 함께 학습하고 추론**하는 통합적인 접근법을 제안했다.  특히, 배경(Background) 샘플에 대한 별도의 학습 없이 오직 객체(Positive Classes)에만 집중함으로써 네트워크가 더 높은 정확도를 달성할 수 있도록 설계했다. 
 
 ---
 
-## OverFeat는 어떻게 동작하는가?
+## OverFeat, 통합된 비전 시스템
+
+OverFeat는 [2013년 ILSVRC 대회](https://www.image-net.org/challenges/LSVRC/2013/results.php#loc)에서 Localization 부문 우승을 차지하며 그 성능을 입증했다. 이 논문의 요점은 이미지에서 object를 동시에 classify, localize 및 detect하도록 단일 CNN을 훈련하면 모든 task에서의 정확도를 높일 수 있음을 보여주는 것이다. 또한 예측된 bounding boxes를 누적하는 방식의 localization 및 detection을 위한 새로운 방식을 소개한다. 이 방식을 통해 background samples에 대한 학습 없이 positive classes에만 집중할 수 있도록 한다.
+
+이 모델의 핵심 아이디어는 다음과 같이 요약할 수 있다.
+
+1.  **통합 프레임워크(Integrated Framework):** 분류, 위치 특정, 탐지라는 각기 다른 작업을 별개의 모델이 아닌, **특징을 공유하는 단일 CNN**으로 학습하고 해결한다. 
+2.  **효율적인 다중 스케일 슬라이딩 윈도우(Multi-Scale Sliding Window):** 다양한 크기의 이미지에 대해 Sliding window 방식을 효율적으로 구현하였다. 이는 여러 크기의 이미지를 각각 네트워크에 input하는 대신 더 큰 이미지에 convolution을 한 번만 적용하여 중복된 계산을 피하는 것이다.
+3.  **Bounidng box regression:** Object의 경계를 예측하도록 학습하는 deep learning apporach를 도입하였다. classifier 뿐만 아니라 object의 정확한 위치와 크기를 예측하는 regression 모델을 별도로 훈련시킨다.
+4.  **예측 누적 및 병합(Prediction Accumulation & Merging):** 탐지된 bounding boxes를 suppress하는 방식 대힌 **accumulate, merge**하여 예측의 신뢰도를 높이는 방식을 제안한다. 이 방식을 통해 background samples에 대한 별도의 훈련 없이 positive classes에만 집중할 수 있게 된다.
+
+
+## OverFeat의 작동 방식
 
 OverFeat 시스템은 분류, 위치 특정, 탐지 작업을 단계적이면서도 유기적으로 해결한다. 모든 작업은 기본적으로 동일한 CNN 구조에서 학습된 특징을 공유한다.
 
