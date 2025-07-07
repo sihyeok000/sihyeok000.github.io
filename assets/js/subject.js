@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 load_div.style.transition = '.75s';
                 load_div.style.opacity = '0';
                 load_div.style.visibility = 'hidden';
-            }, 800);
+            }, 500);
         }
     });
 
